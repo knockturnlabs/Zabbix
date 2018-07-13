@@ -2,7 +2,20 @@
 - name: Zabbix - Add Host
   hosts: localhost
   gather_facts: no
-
+  vars:
+    zabbix_force_update: yes
+    zabbix_server_url: http://zabbix.knockturn.local/zabbix
+    zabbix_user_login: admin
+    zabbix_user_pass: zabbix
+    zabbix_host_name: test-host2
+    zabbix_host_groups: firewalls
+    zabbix_host_templates: cisco asa
+    zabbix_host_status: enabled
+    zabbix_host_state: present
+    zabbix_host_int_type: snmp
+    zabbix_host_int_address: 8.8.8.8
+    zabbix_host_list_port: 161
+    zabbix_host_proxy:
   tasks:
   - name: Zabbix - Add Host
     zabbix_host:
@@ -24,5 +37,5 @@
           ip: '{{ zabbix_host_int_address }}'
           dns: ""
           port: '{{ zabbix_host_list_port }}'
-      proxy: '{{ zabbix_host_proxy }}'
+      proxy: '{{ zabbix_host_proxy|default("") }}'
       validate_certs: false
