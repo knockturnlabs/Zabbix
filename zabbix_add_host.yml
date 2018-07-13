@@ -1,0 +1,28 @@
+---
+- name: Zabbix - Add Host
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+  - name: Zabbix - Add Host
+    zabbix_host:
+      force: '{{ zabbix_force_update }}'
+      server_url: '{{ zabbix_server_url }}'
+      login_user: '{{ zabbix_user_login }}'
+      login_password: '{{ zabbix_user_pass }}'
+      host_name: '{{ zabbix_host_name }}'
+      host_groups: 
+        - '{{ zabbix_host_groups }}'
+      link_templates:
+        - '{{ zabbix_host_templates }}'
+      status: '{{ zabbix_host_status }}'
+      state: '{{ zabbix_host_state }}'
+      interfaces:
+        - type: '{{ zabbix_host_int_type }}'
+          main: 1
+          useip: 1
+          ip: '{{ zabbix_host_int_address }}'
+          dns: ""
+          port: '{{ zabbix_host_list_port }}'
+      proxy: '{{ zabbix_host_proxy }}'
+      validate_certs: false
